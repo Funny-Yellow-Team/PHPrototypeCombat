@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3yq52ykn4pqb"]
+
+[ext_resource type="Texture2D" uid="uid://cbvca7xy16311" path="res://assets/textures/floor.png" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ud35f84weq0h" path="res://assets/prefabs/Character.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://643lb3qvl6bl" path="res://assets/prefabs/character_test.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://dtaax0hvdes7" path="res://test.gd" id="4_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_texture = ExtResource("1_ig7tw")
+uv1_scale = Vector3(4, 8, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
+material = SubResource("StandardMaterial3D_0xm2m")
+
+[node name="Root" type="Node3D"]
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 16, 0, 0, 0)
+mesh = SubResource("PlaneMesh_h2yge")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.5345, -0.470053, 0.702396, 3.13832e-08, 0.831072, 0.556164, -0.845168, -0.29727, 0.444208, 11.4824, 9.41465, 6.46348)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.68381, -0.434101, 0.586482, 3.82111e-08, 0.803774, 0.594935, -0.729661, -0.406822, 0.549627, -11.9313, 4.24136, 0)
+shadow_enabled = true
+
+[node name="Character" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62232, 7.97452)
+script = ExtResource("3_h2yge")
+target = NodePath("../Enemy1")
+enable_hurt = true
+
+[node name="Timer" type="Timer" parent="Character"]
+autostart = true
+ignore_time_scale = true
+
+[node name="Character3" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.40284, 1.62232, 7.97452)
+
+[node name="Timer" type="Timer" parent="Character3"]
+autostart = true
+ignore_time_scale = true
+
+[node name="Enemy1" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.66508, 1.62232, -7.71616)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.6108, 1.62232, -7.71616)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Control" node_paths=PackedStringArray("perso1", "perso2", "target", "target2")]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+offset_right = 8.0
+offset_bottom = 8.0
+text = "attack"
+script = ExtResource("4_1bvp3")
+perso1 = NodePath("../../Character")
+perso2 = NodePath("../../Character3")
+target = NodePath("../../Enemy1")
+target2 = NodePath("../../Enemy2")
+
+[connection signal="timeout" from="Character/Timer" to="Character" method="_on_timer_timeout"]
+[connection signal="timeout" from="Character3/Timer" to="Character3" method="_on_timer_timeout"]
+[connection signal="pressed" from="Control/Button" to="Character" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Button" to="Control/Button" method="_on_pressed"]

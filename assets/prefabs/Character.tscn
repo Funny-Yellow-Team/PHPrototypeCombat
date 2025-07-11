@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://ud35f84weq0h"]
+
+[ext_resource type="Script" uid="uid://bn7l20hjctt6r" path="res://scripts/components/HealthComponent.gd" id="1_fowce"]
+[ext_resource type="Script" uid="uid://ddgxghf80xu0f" path="res://scripts/components/HealthBarComponent.gd" id="2_yaykh"]
+[ext_resource type="PackedScene" uid="uid://ctu4uld5od78r" path="res://assets/prefabs/BasicHealthBar.tscn" id="3_yaykh"]
+[ext_resource type="Script" uid="uid://cyxds4ydqwxcx" path="res://scripts/components/DisplayComponent.gd" id="4_72e54"]
+[ext_resource type="PackedScene" uid="uid://b0vkgsbe0x0nt" path="res://assets/prefabs/StatsDisplay.tscn" id="5_2x4da"]
+[ext_resource type="PackedScene" uid="uid://cvdh06y827c5q" path="res://assets/models/dogecube.glb" id="6_6ly7i"]
+[ext_resource type="Script" uid="uid://0b4awbebsnfd" path="res://scripts/components/MovementComponent.gd" id="7_2x4da"]
+[ext_resource type="AnimationLibrary" uid="uid://nw2v0apkr42n" path="res://assets/animations/CharacterAnimLib.tres" id="8_6ly7i"]
+[ext_resource type="Script" uid="uid://nul7g7xjapl6" path="res://scripts/components/AnimationComponent.gd" id="9_ax83m"]
+[ext_resource type="Script" uid="uid://yf8qt2xwv57g" path="res://scripts/components/AttackComponent.gd" id="10_ax83m"]
+
+[sub_resource type="Animation" id="Animation_6ly7i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DisplayComponent:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisplayComponent:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ax83m"]
+_data = {
+&"RESET": SubResource("Animation_6ly7i")
+}
+
+[node name="Character" type="Node3D"]
+
+[node name="HealthComponent" type="Node3D" parent="."]
+script = ExtResource("1_fowce")
+base_health = 1000
+metadata/_custom_type_script = "uid://bn7l20hjctt6r"
+
+[node name="HealthBarComponent" type="Node3D" parent="." node_paths=PackedStringArray("health_bar_handler")]
+script = ExtResource("2_yaykh")
+health_bar_handler = NodePath("BasicHealthBar")
+metadata/_custom_type_script = "uid://ddgxghf80xu0f"
+
+[node name="BasicHealthBar" parent="HealthBarComponent" instance=ExtResource("3_yaykh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8093, 0)
+
+[node name="DisplayComponent" type="Node3D" parent="." node_paths=PackedStringArray("main_asset")]
+script = ExtResource("4_72e54")
+main_asset = NodePath("dogecube")
+stats_display = ExtResource("5_2x4da")
+metadata/_custom_type_script = "uid://cyxds4ydqwxcx"
+
+[node name="dogecube" parent="DisplayComponent" instance=ExtResource("6_6ly7i")]
+
+[node name="MovementComponent" type="CharacterBody3D" parent="."]
+script = ExtResource("7_2x4da")
+movement_speed = 10
+distance_margin = 0.01
+metadata/_custom_type_script = "uid://0b4awbebsnfd"
+
+[node name="AnimationComponent" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ax83m"),
+&"CharacterAnimLib": ExtResource("8_6ly7i")
+}
+script = ExtResource("9_ax83m")
+metadata/_custom_type_script = "uid://nul7g7xjapl6"
+
+[node name="AttackComponent" type="Node3D" parent="."]
+script = ExtResource("10_ax83m")
+metadata/_custom_type_script = "uid://yf8qt2xwv57g"

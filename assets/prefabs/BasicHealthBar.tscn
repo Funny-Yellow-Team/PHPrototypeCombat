@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctu4uld5od78r"]
+
+[ext_resource type="Script" uid="uid://wiy6iwhtb216" path="res://scripts/components/HealthBarHandler.gd" id="1_x0kj0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0kj0"]
+bg_color = Color(0.404976, 0.690569, 0.0607277, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sjk1m"]
+viewport_path = NodePath("SubViewport")
+
+[node name="BasicHealthBar" type="Node3D" node_paths=PackedStringArray("progress_bar")]
+script = ExtResource("1_x0kj0")
+progress_bar = NodePath("SubViewport/Control/ProgressBar")
+metadata/_custom_type_script = "uid://wiy6iwhtb216"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(256, 16)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_x0kj0")
+rounded = true
+show_percentage = false
+
+[node name="BarSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 127
+texture = SubResource("ViewportTexture_sjk1m")

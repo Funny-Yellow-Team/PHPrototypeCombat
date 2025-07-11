@@ -1,0 +1,100 @@
+workspace "Name" "Description" {
+
+    !identifiers hierarchical
+
+    model {
+        user = person "User"
+        gd = person "Game designer"
+        game = softwareSystem "Game" {
+            gameEnv = container "Game environment" "Configurable environment to configure characters and ennemies (attack list & health)" {
+                atkEdit = component "Attack type editor" "Allows to configure attack types"
+                spawnPts = component "Spawn points" "Nodes to know where the characters are spawning"
+                teamMgr = component "Team manager" "Creates character and set their teams"
+            }
+            combatItf = container "Combat interface" "UI to select characters, attacks and targets"
+            chrMng = container "Character" "Spawnable prefab containing everything needed for a configurable character" {
+                chrNode = component "Character node" "Uses its components to handle the character logic"
+                healCmp = component "Health component" "Adds or removes health to its character"
+                atkCmp = component "Attack component" "Allows to use attack from attackTypeComponent on healthComponents, manages attack cooldowns"
+                atkTypeCmp = component "Attack types component" "Stores attack types"
+                animCmp = component "Animation component" "Manages animation (movement & effects) of character. Exposes signals at key points of animations."
+                healBarCmp = component "Health bar component" "Displays health bar"
+                cfgCmp = component "Configuration component" "Editor tools to configure the character"
+                dspCmp = component "Display component" "Displays the character and effect/UI related"
+                movCmp = component "Movement component" "Handles movement and physics"
+            }
+            
+        }
+
+        user -> game "Plays"
+        user -> game.combatItf "Controls"
+        gd -> game.gameEnv "Configure the environment"
+        gd -> game.chrMng.cfgCmp "Configure the character"
+        game.gameEnv -> game.chrMng "Instantiates characters"
+        game.combatItf -> game.chrMng "Executes actions"
+        game.chrMng.chrNode -> game.chrMng.healCmp "Contains"
+        game.chrMng.chrNode -> game.chrMng.atkCmp "Contains"
+        game.chrMng.chrNode -> game.chrMng.atkTypeCmp "Contains"
+        game.chrMng.chrNode -> game.chrMng.animCmp "Contains"
+        game.chrMng.chrNode -> game.chrMng.healBarCmp "Contains"
+        game.chrMng.chrNode -> game.chrMng.cfgCmp "Contains"
+        game.chrMng.chrNode -> game.chrMng.dspCmp "Contains"
+        game.chrMng.chrNode -> game.chrMng.movCmp "Contains"
+        game.chrMng.movCmp -> game.chrMng.chrNode "Moves"
+        game.chrMng.atkCmp -> game.chrMng.healCmp "Triggers health changes"
+        game.chrMng.atkCmp -> game.chrMng.animCmp "Triggers animation corresponding to attack type"
+        game.chrMng.atkCmp -> game.chrMng.atkTypeCmp "Retrieve attack types"
+        game.chrMng.healBarCmp -> game.chrMng.healCmp "Retrieve health data"
+        game.chrMng.cfgCmp -> game.chrMng.atkTypeCmp "Configures attack types"
+        game.chrMng.cfgCmp -> game.chrMng.healCmp "Configures health"
+    }
+
+    views {
+        systemContext game "SystemDiagram" {
+            include *
+            autolayout lr
+        }
+
+        container game "GameContextDiagram" {
+            include *
+            autolayout lr
+        }
+        
+        component game.gameEnv "GameEnvironmentDiagram" {
+            include *
+            autolayout tb
+        }
+        
+        component game.chrMng "CharacterManagementDiagram" {
+            include *
+            autolayout tb
+        }
+
+        styles {
+            element "Element" {
+                color #ffffff
+            }
+            element "Person" {
+                background #048c04
+                shape person
+            }
+            element "Software System" {
+                background #047804
+            }
+            element "Container" {
+                background #55aa55
+            }
+            element "Component" {
+                background #5555aa
+            }
+            element "Database" {
+                shape cylinder
+            }
+        }
+    }
+
+    configuration {
+        scope softwaresystem
+    }
+
+}
