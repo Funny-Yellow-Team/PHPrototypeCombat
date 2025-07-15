@@ -29,7 +29,6 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62232, 7.97452)
 script = ExtResource("3_h2yge")
 target = NodePath("../Enemy1")
-enable_hurt = true
 
 [node name="Timer" type="Timer" parent="Character"]
 autostart = true
@@ -67,6 +66,7 @@ perso1 = NodePath("../../Character")
 perso2 = NodePath("../../Character3")
 target = NodePath("../../Enemy1")
 target2 = NodePath("../../Enemy2")
+attack_type = 4
 
 [connection signal="timeout" from="Character/Timer" to="Character" method="_on_timer_timeout"]
 [connection signal="timeout" from="Character3/Timer" to="Character3" method="_on_timer_timeout"]

@@ -12,7 +12,6 @@ func trigger_attack(source: Node3D, targets: Array[Node3D], damage: int):
 	var trg_heal_cmp = ServiceContainer.get_health_component(target)
 	heal_ball_mov_cmp.set_target_position(target.global_position + Vector3(0, 3, 0))
 	await heal_ball_mov_cmp.reached_target
-	print_debug("wut?")
 	heal_ball_mov_cmp.set_target_position(target.global_position)
 	await heal_ball_mov_cmp.reached_target
 	trg_heal_cmp.heal(damage)

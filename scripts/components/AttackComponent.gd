@@ -23,10 +23,22 @@ func _ready() -> void:
 		Enums.AttackStyles.HEAL,
 		200,
 		5))
+	attack_presets.append(AttackPreset.instantiate_preset(
+		get_parent(),
+		"Heal",
+		Enums.AttackStyles.MULTIPLE_HEAL,
+		100,
+		8))
+	for preset in attack_presets:
+		add_child(preset)
 
 func do_attack(targets: Array[Node3D], attack_style: Enums.AttackStyles, damage: int):
 	if (is_attacking):
 		return
 	is_attacking = true
-	#TODO Use the attack preset
+	for preset in attack_presets:
+		if attack_style == preset.style:
+			await preset.trigger_attack(targets)
+			break
+	print_debug("attack is done")
 	is_attacking = false

@@ -24,6 +24,7 @@ static func instantiate_preset(
 	preset.cooldown_timer.autostart = false
 	preset.cooldown_timer.wait_time = cooldown
 	preset.cooldown_timer.one_shot = true
+	preset.cooldown_timer.paused = false
 	preset.cooldown_timer.timeout.connect(preset.on_cooldown_elapsed)
 	preset.add_child(preset.cooldown_timer)
 	return preset
@@ -52,4 +53,5 @@ func trigger_attack(targets: Array[Node3D]):
 		cooldown_timer.start()
 
 func on_cooldown_elapsed():
+	print_debug("no cooldowno")
 	can_attack = true

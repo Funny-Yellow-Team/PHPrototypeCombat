@@ -22,7 +22,6 @@ func _physics_process(delta: float) -> void:
 		position = original_relative_position
 		if (global_position.distance_to(target_position) < distance_margin):
 			close_to_target = true
-			print_debug("reached target")
 			emit_signal("reached_target")
 
 func set_target_position(new_position: Vector3):
