@@ -34,8 +34,9 @@ func _ready() -> void:
 			ally_templates[i],
 			ally_spawn_points[i].global_position,
 			ally_spawn_points[i].rotation)
-		instantiate_character_menu(character, ennemies[0])
 		allies.append(character)
+	for ally in allies:
+		instantiate_character_menu(ally)
 
 func instantiate_character(template: CharacterTemplate, spawn_position: Vector3, spawn_rotation: Vector3):
 	var character: Node3D = template.prefab.instantiate()
@@ -62,8 +63,9 @@ func instantiate_attack_preset(template: AttackPresetTemplate, character: Node3D
 		template.cooldown
 	))
 
-func instantiate_character_menu(character: Node3D, debug_target: Node3D):
+func instantiate_character_menu(character: Node3D):
 	var menu = character_menu_prefab.instantiate() as CharacterMenu
 	menu.character = character
-	menu.debug_target = debug_target
+	menu.allies = allies
+	menu.ennemies = ennemies
 	control_node.add_child.call_deferred(menu)

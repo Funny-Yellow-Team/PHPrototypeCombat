@@ -31,7 +31,6 @@ metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 [node name="ChargeAttack" type="Node" parent="CombatManager/McDogeTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Charge"
-target_type = 1
 damage = 50
 cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
@@ -40,7 +39,6 @@ metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 script = ExtResource("3_5vw27")
 attack_name = "Stomp"
 attack_style = 2
-target_type = 1
 is_multi_target = true
 damage = 25
 cooldown = 5.0
@@ -50,7 +48,6 @@ metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 script = ExtResource("3_5vw27")
 attack_name = "Fireball"
 attack_style = 1
-target_type = 1
 damage = 100
 cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
@@ -65,7 +62,6 @@ metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 [node name="ChargeAttack" type="Node" parent="CombatManager/DogesonTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Charge"
-target_type = 1
 damage = 50
 cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
@@ -74,7 +70,6 @@ metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 script = ExtResource("3_5vw27")
 attack_name = "Stomp"
 attack_style = 2
-target_type = 1
 is_multi_target = true
 damage = 50
 cooldown = 5.0
@@ -84,6 +79,7 @@ metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 script = ExtResource("3_5vw27")
 attack_name = "Heal"
 attack_style = 3
+target_type = 1
 damage = 100
 cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
@@ -99,6 +95,7 @@ metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 script = ExtResource("3_5vw27")
 attack_name = "Heal"
 attack_style = 3
+target_type = 1
 damage = 100
 cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
@@ -107,6 +104,7 @@ metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 script = ExtResource("3_5vw27")
 attack_name = "Heal++"
 attack_style = 4
+target_type = 1
 is_multi_target = true
 damage = 50
 cooldown = 4.0
@@ -116,6 +114,7 @@ metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 script = ExtResource("3_5vw27")
 attack_name = "Revive"
 attack_style = 5
+target_type = 1
 damage = 250
 cooldown = 5.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
@@ -139,16 +138,16 @@ max_health = 1000
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="AllySpawnPoint1" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.19413, 1.25, 8.16894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.25, 8)
 
 [node name="AllySpawnPoint2" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23127, 1.25, 8.16894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.25, 8)
 
 [node name="AllySpawnPoint3" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0756, 1.25, 8.16894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.25, 8)
 
 [node name="AllySpawnPoint4" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.69521, 1.25, 8.16894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.25, 8)
 
 [node name="EnnemySpawnPoint1" type="Node3D" parent="CombatManager"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.04793, 1.25, -6.31359)
