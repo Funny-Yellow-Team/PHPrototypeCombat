@@ -4,7 +4,7 @@ class_name BaseAttackStyle
 signal attack_done
 
 func _init() -> void:
-	if (self.get_script() == preload("res://scripts/attackStyles/BaseAttackStyle.gd")):
+	if (self.get_script() == preload("res://scripts/attackSystem/BaseAttackStyle.gd")):
 		push_error("Cannot instantiate base attack type directly!")
 
 func trigger_attack(source: Node3D, targets: Array[Node3D], damage: int):

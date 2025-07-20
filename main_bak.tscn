@@ -1,35 +1,74 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3yq52ykn4pqb"]
+[gd_scene load_steps=10 format=3 uid="uid://bppk4ox4fhjlq"]
 
-[ext_resource type="Script" uid="uid://bwbupkvhbhibw" path="res://scripts/game/CombatManager.gd" id="1_7mycd"]
-[ext_resource type="Texture2D" uid="uid://cbvca7xy16311" path="res://assets/textures/floor.png" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://dtjbnhtxe5a88" path="res://scripts/game/templates/CharacterTemplate.gd" id="2_272bh"]
-[ext_resource type="Script" uid="uid://bn3kywdjpfoip" path="res://scripts/game/templates/AttackPresetTemplate.gd" id="3_5vw27"]
+[ext_resource type="Script" uid="uid://bwbupkvhbhibw" path="res://scripts/game/CombatManager.gd" id="1_5g7j8"]
+[ext_resource type="Script" uid="uid://dtjbnhtxe5a88" path="res://scripts/game/templates/CharacterTemplate.gd" id="2_nlmqx"]
+[ext_resource type="Script" uid="uid://bn3kywdjpfoip" path="res://scripts/game/templates/AttackPresetTemplate.gd" id="3_2ekra"]
+[ext_resource type="Texture2D" uid="uid://cbvca7xy16311" path="res://assets/textures/floor.png" id="4_fnfqa"]
+[ext_resource type="PackedScene" uid="uid://ud35f84weq0h" path="res://assets/prefabs/Character.tscn" id="5_tl06t"]
+[ext_resource type="PackedScene" uid="uid://1y2bwbihx4v1" path="res://assets/prefabs/CharacterMenu.tscn" id="6_3a1ag"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
-albedo_texture = ExtResource("1_ig7tw")
+albedo_texture = ExtResource("4_fnfqa")
 uv1_scale = Vector3(4, 8, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
 material = SubResource("StandardMaterial3D_0xm2m")
 
+[sub_resource type="GDScript" id="GDScript_1bvp3"]
+script/source = "extends Node3D
+
+@export var target: Node3D
+@export var enable_hurt: bool = false
+
+func on_target_reached():
+	print_debug(\"target reached\")
+	debug_move()
+
+func _on_timer_timeout() -> void:
+	if !enable_hurt:
+		return
+	debug_heal()
+
+func debug_move():
+	var mov_cmp = ServiceContainer.get_movement_component(self)
+	var target = Vector3(randf_range(-6, 6), mov_cmp.global_position.y, randf_range(-14, 14))
+	print_debug(target)
+	mov_cmp.set_speed(randi_range(100, 300))
+	mov_cmp.set_target_position(target)
+
+func debug_heal():
+	var heal_cmp = ServiceContainer.get_health_component(self)
+	heal_cmp.hurt(randi_range(10, 250))
+	return
+	var rng = randi_range(0, 1)
+	match rng:
+		0:
+			heal_cmp.hurt(randi_range(10, 250))
+		1:
+			heal_cmp.heal(randi_range(10, 250))
+
+func _on_button_pressed() -> void:
+	return
+	var atk_cmp = ServiceContainer.get_attack_component(self)
+	atk_cmp.do_forward_attack(target)
+"
+
 [node name="Root" type="Node3D"]
 
-[node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("ally_templates", "ennemy_templates", "control_node")]
-script = ExtResource("1_7mycd")
-ally_templates = [NodePath("McDogeTemplate"), NodePath("DogesonTemplate"), NodePath("DuDogeTemplate")]
-ennemy_templates = [NodePath("EnnemyTemplate1"), NodePath("EnnemyTemplate2"), NodePath("EnnemyTemplate3")]
-control_node = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/CharacterHBox")
+[node name="CombatManager" type="Node" parent="." node_paths=PackedStringArray("allies")]
+script = ExtResource("1_5g7j8")
+allies = [NodePath("McDogeTemplate"), NodePath("DogesonTemplate"), NodePath("DuDogeTemplate")]
 metadata/_custom_type_script = "uid://bwbupkvhbhibw"
 
 [node name="McDogeTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
-script = ExtResource("2_272bh")
+script = ExtResource("2_nlmqx")
 character_name = "McDoge"
 max_health = 1000
 attack_presets = [NodePath("ChargeAttack"), NodePath("StompAttack"), NodePath("FireballAttack")]
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="ChargeAttack" type="Node" parent="CombatManager/McDogeTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Charge"
 target_type = 1
 damage = 50
@@ -37,7 +76,7 @@ cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="StompAttack" type="Node" parent="CombatManager/McDogeTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Stomp"
 attack_style = 2
 target_type = 1
@@ -47,7 +86,7 @@ cooldown = 5.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="FireballAttack" type="Node" parent="CombatManager/McDogeTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Fireball"
 attack_style = 1
 target_type = 1
@@ -56,14 +95,14 @@ cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="DogesonTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
-script = ExtResource("2_272bh")
+script = ExtResource("2_nlmqx")
 character_name = "Dogeson"
 max_health = 1200
 attack_presets = [NodePath("ChargeAttack"), NodePath("StompAttack"), NodePath("HealAttack")]
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="ChargeAttack" type="Node" parent="CombatManager/DogesonTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Charge"
 target_type = 1
 damage = 50
@@ -71,7 +110,7 @@ cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="StompAttack" type="Node" parent="CombatManager/DogesonTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Stomp"
 attack_style = 2
 target_type = 1
@@ -81,7 +120,7 @@ cooldown = 5.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="HealAttack" type="Node" parent="CombatManager/DogesonTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Heal"
 attack_style = 3
 damage = 100
@@ -89,14 +128,14 @@ cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="DuDogeTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
-script = ExtResource("2_272bh")
+script = ExtResource("2_nlmqx")
 character_name = "DuDoge"
 max_health = 800
 attack_presets = [NodePath("HealAttack"), NodePath("BigHealAttack"), NodePath("RezAttack")]
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="HealAttack" type="Node" parent="CombatManager/DuDogeTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Heal"
 attack_style = 3
 damage = 100
@@ -104,7 +143,7 @@ cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="BigHealAttack" type="Node" parent="CombatManager/DuDogeTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Heal++"
 attack_style = 4
 is_multi_target = true
@@ -113,7 +152,7 @@ cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="RezAttack" type="Node" parent="CombatManager/DuDogeTemplate"]
-script = ExtResource("3_5vw27")
+script = ExtResource("3_2ekra")
 attack_name = "Revive"
 attack_style = 5
 damage = 250
@@ -121,58 +160,22 @@ cooldown = 5.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="EnnemyTemplate1" type="Node" parent="CombatManager"]
-script = ExtResource("2_272bh")
+script = ExtResource("2_nlmqx")
 character_name = "Van Doge"
 max_health = 1000
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="EnnemyTemplate2" type="Node" parent="CombatManager"]
-script = ExtResource("2_272bh")
+script = ExtResource("2_nlmqx")
 character_name = "El Doge"
 max_health = 1000
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="EnnemyTemplate3" type="Node" parent="CombatManager"]
-script = ExtResource("2_272bh")
+script = ExtResource("2_nlmqx")
 character_name = "Dogeccio"
 max_health = 1000
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
-
-[node name="AllySpawnPoint1" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.19413, 1.25, 8.16894)
-
-[node name="AllySpawnPoint2" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23127, 1.25, 8.16894)
-
-[node name="AllySpawnPoint3" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0756, 1.25, 8.16894)
-
-[node name="AllySpawnPoint4" type="Node3D" parent="CombatManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.69521, 1.25, 8.16894)
-
-[node name="EnnemySpawnPoint1" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.04793, 1.25, -6.31359)
-
-[node name="EnnemySpawnPoint2" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.96422, 1.25, -6.31359)
-
-[node name="EnnemySpawnPoint3" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.70022, 1.25, -6.31359)
-
-[node name="EnnemySpawnPoint4" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.00547, 1.25, -6.31359)
-
-[node name="EnnemySpawnPoint5" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.00547, 1.25, -10.2099)
-
-[node name="EnnemySpawnPoint6" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.90824, 1.25, -10.2099)
-
-[node name="EnnemySpawnPoint7" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.03003, 1.25, -10.2099)
-
-[node name="EnnemySpawnPoint8" type="Node3D" parent="CombatManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.03864, 1.25, -10.2099)
 
 [node name="floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 16, 0, 0, 0)
@@ -184,6 +187,28 @@ transform = Transform3D(0.773509, -0.352489, 0.526722, 9.8996e-08, 0.831072, 0.5
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.68381, -0.434101, 0.586482, 3.82111e-08, 0.803774, 0.594935, -0.729661, -0.406822, 0.549627, -11.9313, 4.24136, 0)
 shadow_enabled = true
+
+[node name="McDoge" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_tl06t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62232, 7.97452)
+script = SubResource("GDScript_1bvp3")
+target = NodePath("../Enemy1")
+
+[node name="Timer" type="Timer" parent="McDoge"]
+autostart = true
+ignore_time_scale = true
+
+[node name="Dogeson" parent="." instance=ExtResource("5_tl06t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.40284, 1.62232, 7.97452)
+
+[node name="Timer" type="Timer" parent="Dogeson"]
+autostart = true
+ignore_time_scale = true
+
+[node name="Enemy1" parent="." instance=ExtResource("5_tl06t")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.66508, 1.62232, -7.71616)
+
+[node name="Enemy2" parent="." instance=ExtResource("5_tl06t")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.6108, 1.62232, -7.71616)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -209,5 +234,20 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="CharacterHBox" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+columns = 2
+
+[node name="CharacterMenu" parent="Control/PanelContainer/MarginContainer/HBoxContainer/GridContainer" node_paths=PackedStringArray("character", "debug_target") instance=ExtResource("6_3a1ag")]
+layout_mode = 2
+character = NodePath("../../../../../../McDoge")
+debug_target = NodePath("../../../../../../Enemy1")
+is_focused_debug = true
+
+[node name="CharacterMenu2" parent="Control/PanelContainer/MarginContainer/HBoxContainer/GridContainer" node_paths=PackedStringArray("character", "debug_target") instance=ExtResource("6_3a1ag")]
+layout_mode = 2
+character = NodePath("../../../../../../Dogeson")
+debug_target = NodePath("../../../../../../Enemy2")
+
+[connection signal="timeout" from="McDoge/Timer" to="McDoge" method="_on_timer_timeout"]
+[connection signal="timeout" from="Dogeson/Timer" to="Dogeson" method="_on_timer_timeout"]

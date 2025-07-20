@@ -4,6 +4,8 @@ class_name AttackPreset
 var source_node: Node3D
 var style: Enums.AttackStyles
 var damage: int
+var target_type: Enums.TargetTypes
+var is_multi_target: bool
 var cooldown: float
 var can_attack: bool = true
 var cooldown_timer: Timer
@@ -12,13 +14,17 @@ static func instantiate_preset(
 		source_node: Node3D,
 		name: String, 
 		style: Enums.AttackStyles, 
-		damage: int, 
+		damage: int,
+		target_type: Enums.TargetTypes,
+		is_multi_target: bool,
 		cooldown: float) -> AttackPreset:
 	var preset = AttackPreset.new()
 	preset.source_node = source_node
 	preset.name = name
 	preset.style = style
 	preset.damage = damage
+	preset.target_type = target_type
+	preset.is_multi_target = is_multi_target
 	preset.cooldown = cooldown
 	preset.cooldown_timer = Timer.new()
 	preset.cooldown_timer.autostart = false
@@ -53,5 +59,4 @@ func trigger_attack(targets: Array[Node3D]):
 		cooldown_timer.start()
 
 func on_cooldown_elapsed():
-	print_debug("no cooldowno")
 	can_attack = true

@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://1y2bwbihx4v1"]
+[gd_scene load_steps=4 format=3 uid="uid://1y2bwbihx4v1"]
 
 [ext_resource type="Script" uid="uid://8jhqb2ulin61" path="res://CharacterMenu.gd" id="1_o4x1j"]
+[ext_resource type="Script" uid="uid://dtyf6delrp06x" path="res://scripts/UI/CharacterHealthBar.gd" id="2_lrspf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrspf"]
+bg_color = Color(0.403922, 0.690196, 0.0588235, 1)
 
 [node name="CharacterMenu" type="VBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
@@ -11,9 +15,17 @@ layout_mode = 2
 text = "name"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="CharacterHealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_lrspf")
+show_percentage = false
+script = ExtResource("2_lrspf")
+metadata/_custom_type_script = "uid://dtyf6delrp06x"
 
 [node name="CooldownBar" type="ProgressBar" parent="."]
 layout_mode = 2
 show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2

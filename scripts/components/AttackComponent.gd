@@ -8,27 +8,7 @@ var can_attack: bool = true
 var current_attack: AttackPreset = null
 
 func _ready() -> void:
-	add_attack_preset(
-		AttackPreset.instantiate_preset(
-			get_parent(),
-			"Forward",
-			Enums.AttackStyles.FORWARD,
-			100,
-			4))
-	add_attack_preset(
-		AttackPreset.instantiate_preset(
-			get_parent(),
-			"Fireball",
-			Enums.AttackStyles.FIREBALL,
-			200,
-			6))
-	add_attack_preset(
-		AttackPreset.instantiate_preset(
-			get_parent(),
-			"Heal",
-			Enums.AttackStyles.HEAL,
-			200,
-			5))
+	pass
 
 func add_attack_preset(preset: AttackPreset):
 	attack_presets.append(preset)

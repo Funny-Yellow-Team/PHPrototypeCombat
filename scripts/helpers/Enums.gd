@@ -14,3 +14,8 @@ enum AttackStyles {
 	MULTIPLE_HEAL,
 	REZ
 }
+
+enum TargetTypes {
+	ENNEMY,
+	ALLY
+}
