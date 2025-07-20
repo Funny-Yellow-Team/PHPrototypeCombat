@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://1y2bwbihx4v1"]
 
-[ext_resource type="Script" uid="uid://8jhqb2ulin61" path="res://CharacterMenu.gd" id="1_o4x1j"]
+[ext_resource type="Script" uid="uid://8jhqb2ulin61" path="res://scripts/UI/CharacterMenu.gd" id="1_o4x1j"]
 [ext_resource type="Script" uid="uid://dtyf6delrp06x" path="res://scripts/UI/CharacterHealthBar.gd" id="2_lrspf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrspf"]
