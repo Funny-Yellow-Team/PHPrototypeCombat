@@ -4,7 +4,7 @@ class_name CharacterMenu
 @export var character: Node3D
 var allies: Array[Node3D]
 var ennemies: Array[Node3D]
-@export var is_focused_debug: bool
+@export var is_focused_debug: bool = false
 var atk_cmp: AttackComponent
 var atk_buttons: Array[Button]
 var selected_attack: AttackPreset
@@ -22,8 +22,8 @@ func _ready() -> void:
 			btn.attack_button_pressed.connect(on_attack_button_pressed)
 			$AttackContainer.add_child(btn)
 			atk_buttons.append(btn)
-	#if is_focused_debug:
-		#atk_buttons[0].grab_focus()
+	if is_focused_debug:
+		atk_buttons[0].grab_focus()
 
 func _process(delta: float) -> void:
 	set_attack_button_disabled(!atk_cmp.can_attack)

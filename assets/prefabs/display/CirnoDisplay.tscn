@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bikuka1klk5ey"]
+
+[ext_resource type="PackedScene" uid="uid://blmfje1wtns28" path="res://assets/models/project_-_cirno_fumo_3d_scan/scene.gltf" id="4_2idrv"]
+
+[node name="CirnoDisplay" type="Node3D"]
+
+[node name="Sketchfab_Scene2" parent="." instance=ExtResource("4_2idrv")]
+transform = Transform3D(0.0579594, 0, -0.0814905, 0, 0.1, 0, 0.0814905, 0, 0.0579594, 1.19086, 0.682965, -0.714763)

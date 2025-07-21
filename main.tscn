@@ -16,26 +16,27 @@ material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("ally_templates", "ennemy_templates", "control_node")]
 script = ExtResource("1_7mycd")
-ally_templates = [NodePath("McDogeTemplate"), NodePath("DogesonTemplate"), NodePath("DuDogeTemplate")]
-ennemy_templates = [NodePath("EnnemyTemplate1"), NodePath("EnnemyTemplate2"), NodePath("EnnemyTemplate3")]
+ally_templates = [NodePath("MaxwellTemplate"), NodePath("OiiaiioooTemplate"), NodePath("EngineerTemplate")]
+ennemy_templates = [NodePath("EnnemyTemplate1"), NodePath("EnnemyTemplate2"), NodePath("EnnemyTemplate3"), NodePath("EnnemyTemplate4")]
 control_node = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/CharacterHBox")
 metadata/_custom_type_script = "uid://bwbupkvhbhibw"
 
-[node name="McDogeTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
+[node name="MaxwellTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
 script = ExtResource("2_272bh")
-character_name = "McDoge"
+character_name = "Maxwell"
 max_health = 1000
 attack_presets = [NodePath("ChargeAttack"), NodePath("StompAttack"), NodePath("FireballAttack")]
+model = 2
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
-[node name="ChargeAttack" type="Node" parent="CombatManager/McDogeTemplate"]
+[node name="ChargeAttack" type="Node" parent="CombatManager/MaxwellTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Charge"
 damage = 50
 cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="StompAttack" type="Node" parent="CombatManager/McDogeTemplate"]
+[node name="StompAttack" type="Node" parent="CombatManager/MaxwellTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Stomp"
 attack_style = 2
@@ -44,7 +45,7 @@ damage = 25
 cooldown = 5.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="FireballAttack" type="Node" parent="CombatManager/McDogeTemplate"]
+[node name="FireballAttack" type="Node" parent="CombatManager/MaxwellTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Fireball"
 attack_style = 1
@@ -52,21 +53,22 @@ damage = 100
 cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="DogesonTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
+[node name="OiiaiioooTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
 script = ExtResource("2_272bh")
-character_name = "Dogeson"
+character_name = "Oiiaiiooo"
 max_health = 1200
 attack_presets = [NodePath("ChargeAttack"), NodePath("StompAttack"), NodePath("HealAttack")]
+model = 4
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
-[node name="ChargeAttack" type="Node" parent="CombatManager/DogesonTemplate"]
+[node name="ChargeAttack" type="Node" parent="CombatManager/OiiaiioooTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Charge"
 damage = 50
 cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="StompAttack" type="Node" parent="CombatManager/DogesonTemplate"]
+[node name="StompAttack" type="Node" parent="CombatManager/OiiaiioooTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Stomp"
 attack_style = 2
@@ -75,7 +77,7 @@ damage = 50
 cooldown = 5.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="HealAttack" type="Node" parent="CombatManager/DogesonTemplate"]
+[node name="HealAttack" type="Node" parent="CombatManager/OiiaiioooTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Heal"
 attack_style = 3
@@ -84,14 +86,15 @@ damage = 100
 cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="DuDogeTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
+[node name="EngineerTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
 script = ExtResource("2_272bh")
-character_name = "DuDoge"
+character_name = "Engineer"
 max_health = 800
 attack_presets = [NodePath("HealAttack"), NodePath("BigHealAttack"), NodePath("RezAttack")]
+model = 7
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
-[node name="HealAttack" type="Node" parent="CombatManager/DuDogeTemplate"]
+[node name="HealAttack" type="Node" parent="CombatManager/EngineerTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Heal"
 attack_style = 3
@@ -100,7 +103,7 @@ damage = 100
 cooldown = 3.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="BigHealAttack" type="Node" parent="CombatManager/DuDogeTemplate"]
+[node name="BigHealAttack" type="Node" parent="CombatManager/EngineerTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Heal++"
 attack_style = 4
@@ -110,7 +113,7 @@ damage = 50
 cooldown = 4.0
 metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
-[node name="RezAttack" type="Node" parent="CombatManager/DuDogeTemplate"]
+[node name="RezAttack" type="Node" parent="CombatManager/EngineerTemplate"]
 script = ExtResource("3_5vw27")
 attack_name = "Revive"
 attack_style = 5
@@ -121,20 +124,29 @@ metadata/_custom_type_script = "uid://bn3kywdjpfoip"
 
 [node name="EnnemyTemplate1" type="Node" parent="CombatManager"]
 script = ExtResource("2_272bh")
-character_name = "Van Doge"
+character_name = "Doge"
 max_health = 1000
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="EnnemyTemplate2" type="Node" parent="CombatManager"]
 script = ExtResource("2_272bh")
-character_name = "El Doge"
+character_name = "Cirno"
 max_health = 1000
+model = 5
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="EnnemyTemplate3" type="Node" parent="CombatManager"]
 script = ExtResource("2_272bh")
-character_name = "Dogeccio"
+character_name = "Cheems"
 max_health = 1000
+model = 1
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+
+[node name="EnnemyTemplate4" type="Node" parent="CombatManager"]
+script = ExtResource("2_272bh")
+character_name = "Obama"
+max_health = 1000
+model = 3
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="AllySpawnPoint1" type="Node3D" parent="CombatManager"]

@@ -5,3 +5,4 @@ class_name CharacterTemplate
 @export var max_health: int
 @export var attack_presets: Array[AttackPresetTemplate]
 @export var prefab: PackedScene = preload("res://assets/prefabs/Character.tscn")
+@export var model: Enums.CharacterModel

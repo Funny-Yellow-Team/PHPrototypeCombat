@@ -1,6 +1,7 @@
 extends Node3D
 class_name CombatManager
 
+var display_list = preload("res://scripts/helpers/DisplayList.gd").new()
 @export var ally_templates: Array[CharacterTemplate]
 var allies: Array[Node3D]
 @export var ennemy_templates: Array[CharacterTemplate]
@@ -9,6 +10,7 @@ var ennemies: Array[Node3D]
 var character_menu_prefab: PackedScene = preload("res://assets/prefabs/CharacterMenu.tscn")
 var ally_spawn_points: Array[Node3D]
 var ennemy_spawn_points: Array[Node3D]
+var set_debug = false
 
 func _ready() -> void:
 	ally_spawn_points.append($AllySpawnPoint1)
@@ -47,6 +49,9 @@ func instantiate_character(template: CharacterTemplate, spawn_position: Vector3,
 	var heal_cmp = ServiceContainer.get_health_component(character)
 	heal_cmp.base_health = template.max_health
 	heal_cmp.current_health = template.max_health
+	var display_cmp = ServiceContainer.get_display_component(character)
+	var model = display_list.display_prefabs[template.model].instantiate()
+	display_cmp.add_child(model)
 	var atk_cmp = ServiceContainer.get_attack_component(character)
 	for preset in template.attack_presets:
 		instantiate_attack_preset(preset, character, atk_cmp)
@@ -68,4 +73,6 @@ func instantiate_character_menu(character: Node3D):
 	menu.character = character
 	menu.allies = allies
 	menu.ennemies = ennemies
+	if (!set_debug):
+		menu.is_focused_debug = true
 	control_node.add_child.call_deferred(menu)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0o30x7ukpy3e"]
+
+[ext_resource type="PackedScene" uid="uid://xdwlqjhktpts" path="res://assets/models/cheems/scene.gltf" id="3_jn25v"]
+
+[node name="CheemsDisplay" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("3_jn25v")]
+transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 0, -0.809632, 2.43981)

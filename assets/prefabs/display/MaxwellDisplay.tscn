@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://djcn753ai5hej"]
+
+[ext_resource type="PackedScene" uid="uid://c22kdcdeora3b" path="res://assets/models/maxwell_the_cat_dingus/scene.gltf" id="3_usoh4"]
+
+[node name="MaxwellDisplay" type="Node3D"]
+
+[node name="Sketchfab_Scene2" parent="." instance=ExtResource("3_usoh4")]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, -0.0641212, -1.13533, 0)

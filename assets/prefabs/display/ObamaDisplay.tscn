@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://x6ccjogd7587"]
+
+[ext_resource type="PackedScene" uid="uid://bxflsub7wvx1y" path="res://assets/models/obama_prism/scene.gltf" id="3_7mfqp"]
+
+[node name="ObamaDisplay" type="Node3D"]
+
+[node name="Sketchfab_Scene2" parent="." instance=ExtResource("3_7mfqp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.948127, 0)

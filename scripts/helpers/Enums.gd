@@ -19,3 +19,14 @@ enum TargetTypes {
 	ENNEMY,
 	ALLY
 }
+
+enum CharacterModel {
+	DOGE_CUBE,
+	CHEEMS,
+	MAXWELL,
+	OBAMA,
+	OIIAIOOO,
+	CIRNO,
+	SANAE,
+	ENGINEER
+}

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://x2aq638pfu4e"]
+
+[ext_resource type="PackedScene" uid="uid://dcx6bhkw52pn6" path="res://assets/models/project_sanae_kochiya_fumo/scene.gltf" id="3_7dx7w"]
+
+[node name="SanaeDisplay" type="Node3D"]
+
+[node name="Sketchfab_Scene2" parent="." instance=ExtResource("3_7dx7w")]
+transform = Transform3D(-4.80825e-07, 0, 11, 0, 11, 0, -11, 0, -4.80825e-07, -0.0397979, -1.05246, 0)

@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://ud35f84weq0h"]
+[gd_scene load_steps=12 format=3 uid="uid://ud35f84weq0h"]
 
 [ext_resource type="Script" uid="uid://bn7l20hjctt6r" path="res://scripts/components/HealthComponent.gd" id="1_fowce"]
 [ext_resource type="Script" uid="uid://ddgxghf80xu0f" path="res://scripts/components/HealthBarComponent.gd" id="2_yaykh"]
 [ext_resource type="PackedScene" uid="uid://ctu4uld5od78r" path="res://assets/prefabs/BasicHealthBar.tscn" id="3_yaykh"]
 [ext_resource type="Script" uid="uid://cyxds4ydqwxcx" path="res://scripts/components/DisplayComponent.gd" id="4_72e54"]
 [ext_resource type="PackedScene" uid="uid://b0vkgsbe0x0nt" path="res://assets/prefabs/StatsDisplay.tscn" id="5_2x4da"]
-[ext_resource type="PackedScene" uid="uid://cvdh06y827c5q" path="res://assets/models/dogecube.glb" id="6_6ly7i"]
 [ext_resource type="Script" uid="uid://0b4awbebsnfd" path="res://scripts/components/MovementComponent.gd" id="7_2x4da"]
 [ext_resource type="AnimationLibrary" uid="uid://nw2v0apkr42n" path="res://assets/animations/CharacterAnimLib.tres" id="8_6ly7i"]
 [ext_resource type="Script" uid="uid://nul7g7xjapl6" path="res://scripts/components/AnimationComponent.gd" id="9_ax83m"]
@@ -58,13 +57,10 @@ metadata/_custom_type_script = "uid://ddgxghf80xu0f"
 [node name="BasicHealthBar" parent="HealthBarComponent" instance=ExtResource("3_yaykh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8093, 0)
 
-[node name="DisplayComponent" type="Node3D" parent="." node_paths=PackedStringArray("main_asset")]
+[node name="DisplayComponent" type="Node3D" parent="."]
 script = ExtResource("4_72e54")
-main_asset = NodePath("dogecube")
 stats_display = ExtResource("5_2x4da")
 metadata/_custom_type_script = "uid://cyxds4ydqwxcx"
-
-[node name="dogecube" parent="DisplayComponent" instance=ExtResource("6_6ly7i")]
 
 [node name="MovementComponent" type="CharacterBody3D" parent="."]
 script = ExtResource("7_2x4da")

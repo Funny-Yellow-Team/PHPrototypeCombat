@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://s6xprmn7yfgr"]
+
+[ext_resource type="PackedScene" uid="uid://cvdh06y827c5q" path="res://assets/models/dogecube.glb" id="3_qj6tg"]
+
+[node name="DogeCubeDisplay" type="Node3D"]
+
+[node name="dogecube" parent="." instance=ExtResource("3_qj6tg")]
