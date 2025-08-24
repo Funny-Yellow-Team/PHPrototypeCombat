@@ -7,26 +7,31 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrspf"]
 bg_color = Color(0.403922, 0.690196, 0.0588235, 1)
 
-[node name="CharacterMenu" type="VBoxContainer"]
+[node name="CharacterMenu" type="PanelContainer"]
 custom_minimum_size = Vector2(150, 0)
+offset_right = 150.0
+offset_bottom = 100.0
 script = ExtResource("1_o4x1j")
 
-[node name="TitleContainer" type="HBoxContainer" parent="."]
+[node name="CharacterContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleContainer" type="HBoxContainer" parent="CharacterContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="CharacterInputTexture" type="TextureRect" parent="TitleContainer"]
+[node name="CharacterInputTexture" type="TextureRect" parent="CharacterContainer/TitleContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("2_7t4qf")
 expand_mode = 1
 
-[node name="CharacterLabel" type="Label" parent="TitleContainer"]
+[node name="CharacterLabel" type="Label" parent="CharacterContainer/TitleContainer"]
 layout_mode = 2
 text = "name"
 horizontal_alignment = 1
 
-[node name="CharacterHealthBar" type="ProgressBar" parent="."]
+[node name="CharacterHealthBar" type="ProgressBar" parent="CharacterContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_lrspf")
@@ -34,19 +39,19 @@ show_percentage = false
 script = ExtResource("2_lrspf")
 metadata/_custom_type_script = "uid://dtyf6delrp06x"
 
-[node name="CooldownBar" type="ProgressBar" parent="."]
+[node name="CooldownBar" type="ProgressBar" parent="CharacterContainer"]
 layout_mode = 2
 show_percentage = false
 
-[node name="AttackContainer" type="VBoxContainer" parent="."]
+[node name="AttackContainer" type="VBoxContainer" parent="CharacterContainer"]
 layout_mode = 2
 
-[node name="TargetContainer" type="VBoxContainer" parent="."]
+[node name="TargetContainer" type="VBoxContainer" parent="CharacterContainer"]
 visible = false
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="TargetContainer"]
+[node name="BackButton" type="Button" parent="CharacterContainer/TargetContainer"]
 layout_mode = 2
 text = "<-"
 
-[connection signal="pressed" from="TargetContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CharacterContainer/TargetContainer/BackButton" to="." method="_on_back_button_pressed"]
