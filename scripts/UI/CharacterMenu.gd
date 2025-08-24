@@ -4,26 +4,29 @@ class_name CharacterMenu
 @export var character: Node3D
 var allies: Array[Node3D]
 var ennemies: Array[Node3D]
-@export var is_focused_debug: bool = false
 var atk_cmp: AttackComponent
 var atk_buttons: Array[Button]
 var selected_attack: AttackPreset
 var trg_buttons: Array[Button]
 var selected_targets: Array[Node3D]
+var input_name: String
 
 func _ready() -> void:
-	$CharacterLabel.text = character.name
+	$TitleContainer/CharacterLabel.text = character.name
 	$CharacterHealthBar.set_character(character)
 	atk_cmp = ServiceContainer.get_attack_component(character)
 	atk_cmp.attack_done.connect(on_attack_done)
+	InputManager.input_mode_changed.connect(on_input_mode_changed)
 	for i in range(0, 3):
 		if (i < atk_cmp.attack_presets.size()):
-			var btn = AttackButton.instantiate_button(character, atk_cmp.attack_presets[i])
+			var btn = AttackButton.instantiate_button(
+				character,
+				atk_cmp.attack_presets[i],
+				InputManager.attack_inputs[i],
+				input_name)
 			btn.attack_button_pressed.connect(on_attack_button_pressed)
-			$AttackContainer.add_child(btn)
+			$AttackContainer.add_child(btn.get_parent())
 			atk_buttons.append(btn)
-	if is_focused_debug:
-		atk_buttons[0].grab_focus()
 
 func _process(delta: float) -> void:
 	set_attack_button_disabled(!atk_cmp.can_attack)
@@ -82,3 +85,10 @@ func reset_targets():
 	for btn in trg_buttons:
 		btn.queue_free()
 	trg_buttons = []
+
+func set_input_name(new_input_name: String):
+	input_name = new_input_name
+	$TitleContainer/CharacterInputTexture.texture = InputManager.texture[input_name]
+
+func on_input_mode_changed():
+	$TitleContainer/CharacterInputTexture.texture = InputManager.texture[input_name]

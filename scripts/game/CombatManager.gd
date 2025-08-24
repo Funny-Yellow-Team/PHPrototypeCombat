@@ -10,7 +10,6 @@ var ennemies: Array[Node3D]
 var character_menu_prefab: PackedScene = preload("res://assets/prefabs/CharacterMenu.tscn")
 var ally_spawn_points: Array[Node3D]
 var ennemy_spawn_points: Array[Node3D]
-var set_debug = false
 
 func _ready() -> void:
 	ally_spawn_points.append($AllySpawnPoint1)
@@ -37,8 +36,8 @@ func _ready() -> void:
 			ally_spawn_points[i].global_position,
 			ally_spawn_points[i].rotation)
 		allies.append(character)
-	for ally in allies:
-		instantiate_character_menu(ally)
+	for i in range(0, allies.size()):
+		instantiate_character_menu(allies[i], i)
 
 func instantiate_character(template: CharacterTemplate, spawn_position: Vector3, spawn_rotation: Vector3):
 	var character: Node3D = template.prefab.instantiate()
@@ -68,11 +67,10 @@ func instantiate_attack_preset(template: AttackPresetTemplate, character: Node3D
 		template.cooldown
 	))
 
-func instantiate_character_menu(character: Node3D):
+func instantiate_character_menu(character: Node3D, idx: int):
 	var menu = character_menu_prefab.instantiate() as CharacterMenu
 	menu.character = character
 	menu.allies = allies
 	menu.ennemies = ennemies
-	if (!set_debug):
-		menu.is_focused_debug = true
+	menu.set_input_name(InputManager.character_inputs[idx])
 	control_node.add_child.call_deferred(menu)

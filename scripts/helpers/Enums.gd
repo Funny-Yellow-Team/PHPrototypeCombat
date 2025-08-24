@@ -30,3 +30,9 @@ enum CharacterModel {
 	SANAE,
 	ENGINEER
 }
+
+enum InputType {
+	KEYBOARD,
+	XBOX,
+	PLAYSTATION
+}
