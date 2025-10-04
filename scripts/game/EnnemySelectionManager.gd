@@ -1,0 +1,4 @@
+extends Resource
+class_name EnnemySelectionManager
+
+var selected_ennemy: SelectableEnnemy

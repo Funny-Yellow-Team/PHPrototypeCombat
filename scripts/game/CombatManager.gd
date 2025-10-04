@@ -6,8 +6,10 @@ var display_list = preload("res://scripts/helpers/DisplayList.gd").new()
 var allies: Array[Node3D]
 @export var ennemy_templates: Array[CharacterTemplate]
 var ennemies: Array[Node3D]
-@export var control_node: Control
+@export var character_menu_container: Control
+@export var ennemy_menu_container: Control
 var character_menu_prefab: PackedScene = preload("res://assets/prefabs/CharacterMenu.tscn")
+var ennemy_menu_prefab: PackedScene = preload("res://assets/prefabs/EnnemyMenu.tscn")
 var ally_spawn_points: Array[Node3D]
 var ennemy_spawn_points: Array[Node3D]
 
@@ -36,6 +38,8 @@ func _ready() -> void:
 			ally_spawn_points[i].global_position,
 			ally_spawn_points[i].rotation)
 		allies.append(character)
+	for i in range(0, ennemies.size()):
+		instantiate_ennemy_menu(ennemies[i])
 	for i in range(0, allies.size()):
 		instantiate_character_menu(allies[i], i)
 
@@ -73,4 +77,9 @@ func instantiate_character_menu(character: Node3D, idx: int):
 	menu.allies = allies
 	menu.ennemies = ennemies
 	menu.set_input_name(InputManager.character_inputs[idx])
-	control_node.add_child.call_deferred(menu)
+	character_menu_container.add_child.call_deferred(menu)
+
+func instantiate_ennemy_menu(character: Node3D):
+	var menu = ennemy_menu_prefab.instantiate() as EnnemyMenu
+	menu.character = character
+	ennemy_menu_container.add_child.call_deferred(menu)

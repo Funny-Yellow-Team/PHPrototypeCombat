@@ -14,11 +14,12 @@ material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Root" type="Node3D"]
 
-[node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("ally_templates", "ennemy_templates", "control_node")]
+[node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("ally_templates", "ennemy_templates", "character_menu_container", "ennemy_menu_container")]
 script = ExtResource("1_7mycd")
 ally_templates = [NodePath("MaxwellTemplate"), NodePath("OiiaiioooTemplate"), NodePath("EngineerTemplate")]
 ennemy_templates = [NodePath("EnnemyTemplate1"), NodePath("EnnemyTemplate2"), NodePath("EnnemyTemplate3"), NodePath("EnnemyTemplate4")]
-control_node = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/CharacterHBox")
+character_menu_container = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/CharacterHBox")
+ennemy_menu_container = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/EnnemiesContainer")
 metadata/_custom_type_script = "uid://bwbupkvhbhibw"
 
 [node name="MaxwellTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
@@ -222,3 +223,8 @@ layout_mode = 2
 
 [node name="CharacterHBox" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+
+[node name="EnnemiesContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4

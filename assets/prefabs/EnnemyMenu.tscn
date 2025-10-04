@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqg2c8oqdsoqv"]
+
+[ext_resource type="Script" uid="uid://dtyf6delrp06x" path="res://scripts/UI/CharacterHealthBar.gd" id="1_14a04"]
+[ext_resource type="Script" uid="uid://d3oroh02uo4pl" path="res://scripts/UI/EnnemyMenu.gd" id="1_m0jxg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0jxg"]
+bg_color = Color(0.403922, 0.690196, 0.0588235, 1)
+
+[node name="EnnemyMenu" type="PanelContainer"]
+script = ExtResource("1_m0jxg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="EnnemyNameLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "le_ennemy"
+
+[node name="CharacterHealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_m0jxg")
+show_percentage = false
+script = ExtResource("1_14a04")
+metadata/_custom_type_script = "uid://dtyf6delrp06x"
