@@ -12,6 +12,9 @@ var character_menu_prefab: PackedScene = preload("res://assets/prefabs/Character
 var ennemy_menu_prefab: PackedScene = preload("res://assets/prefabs/EnnemyMenu.tscn")
 var ally_spawn_points: Array[Node3D]
 var ennemy_spawn_points: Array[Node3D]
+var ennemy_menu_list: Array[EnnemyMenu]
+var selected_ennemy_idx: int
+var last_selected_ennemy: EnnemyMenu
 
 func _ready() -> void:
 	ally_spawn_points.append($AllySpawnPoint1)
@@ -42,6 +45,36 @@ func _ready() -> void:
 		instantiate_ennemy_menu(ennemies[i])
 	for i in range(0, allies.size()):
 		instantiate_character_menu(allies[i], i)
+	set_selected_ennemy.call_deferred(0)
+
+func _process(delta: float) -> void:
+	if (Input.is_action_just_pressed("ui_up")):
+		selected_ennemy_idx = move_idx(-2)
+		set_selected_ennemy(selected_ennemy_idx)
+	if (Input.is_action_just_pressed("ui_down")):
+		selected_ennemy_idx = move_idx(2)
+		set_selected_ennemy(selected_ennemy_idx)
+	if (Input.is_action_just_pressed("ui_left")):
+		selected_ennemy_idx = move_idx(-(selected_ennemy_idx % 2))
+		set_selected_ennemy(selected_ennemy_idx)
+	if (Input.is_action_just_pressed("ui_right")):
+		selected_ennemy_idx = move_idx(abs(1 - (selected_ennemy_idx % 2)))
+		set_selected_ennemy(selected_ennemy_idx)
+
+func move_idx(offset: int):
+	var new_idx = selected_ennemy_idx + offset
+	if (new_idx >= ennemy_menu_container.get_children().size()):
+		new_idx = selected_ennemy_idx
+	if (new_idx < 0):
+		new_idx = selected_ennemy_idx
+	return new_idx
+
+func set_selected_ennemy(idx: int):
+	var ennemy_menu = ennemy_menu_container.get_children()[idx] as EnnemyMenu
+	if (last_selected_ennemy != null):
+		last_selected_ennemy.set_selected(false)
+	ennemy_menu.set_selected(true)
+	last_selected_ennemy = ennemy_menu
 
 func instantiate_character(template: CharacterTemplate, spawn_position: Vector3, spawn_rotation: Vector3):
 	var character: Node3D = template.prefab.instantiate()

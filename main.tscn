@@ -224,7 +224,8 @@ layout_mode = 2
 [node name="CharacterHBox" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="EnnemiesContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="EnnemiesContainer" type="GridContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
+columns = 2
