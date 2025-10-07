@@ -73,7 +73,11 @@ func set_selected_ennemy(idx: int):
 	var ennemy_menu = ennemy_menu_container.get_children()[idx] as EnnemyMenu
 	if (last_selected_ennemy != null):
 		last_selected_ennemy.set_selected(false)
+		var old_select_cmp = ServiceContainer.get_selection_component(last_selected_ennemy.character)
+		old_select_cmp.set_selected(false)
 	ennemy_menu.set_selected(true)
+	var select_cmp = ServiceContainer.get_selection_component(ennemy_menu.character)
+	select_cmp.set_selected(true)
 	last_selected_ennemy = ennemy_menu
 
 func instantiate_character(template: CharacterTemplate, spawn_position: Vector3, spawn_rotation: Vector3):

@@ -65,3 +65,14 @@ static func get_movement_component(node: Node) -> MovementComponent:
 	if movement_cmp == null:
 		push_error("The node %s does not contain a MovementComponent" % [node.name])
 	return movement_cmp
+
+static func get_selection_component(node: Node) -> SelectionComponent:
+	if node == null:
+		push_error("Node given in parameter is null")
+	var select_cmp: SelectionComponent
+	for child in node.get_children(true):
+		if child is SelectionComponent:
+			select_cmp = child
+	if select_cmp == null:
+		push_error("The node %s does not contain a SelectionComponent" % [node.name])
+	return select_cmp

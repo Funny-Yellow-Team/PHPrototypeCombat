@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ud35f84weq0h"]
+[gd_scene load_steps=15 format=3 uid="uid://ud35f84weq0h"]
 
 [ext_resource type="Script" uid="uid://bn7l20hjctt6r" path="res://scripts/components/HealthComponent.gd" id="1_fowce"]
 [ext_resource type="Script" uid="uid://ddgxghf80xu0f" path="res://scripts/components/HealthBarComponent.gd" id="2_yaykh"]
@@ -9,6 +9,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://nw2v0apkr42n" path="res://assets/animations/CharacterAnimLib.tres" id="8_6ly7i"]
 [ext_resource type="Script" uid="uid://nul7g7xjapl6" path="res://scripts/components/AnimationComponent.gd" id="9_ax83m"]
 [ext_resource type="Script" uid="uid://yf8qt2xwv57g" path="res://scripts/components/AttackComponent.gd" id="10_ax83m"]
+[ext_resource type="Script" uid="uid://bbmcdiwu6bcjn" path="res://scripts/components/SelectionComponent.gd" id="10_kjrou"]
 
 [sub_resource type="Animation" id="Animation_6ly7i"]
 length = 0.001
@@ -41,6 +42,14 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_6ly7i")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ax83m"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
+disable_receive_shadows = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_kjrou"]
+material = SubResource("StandardMaterial3D_ax83m")
 
 [node name="Character" type="Node3D"]
 
@@ -79,3 +88,12 @@ metadata/_custom_type_script = "uid://nul7g7xjapl6"
 [node name="AttackComponent" type="Node3D" parent="."]
 script = ExtResource("10_ax83m")
 metadata/_custom_type_script = "uid://yf8qt2xwv57g"
+
+[node name="SelectionComponent" type="Node3D" parent="." node_paths=PackedStringArray("selection_display")]
+script = ExtResource("10_kjrou")
+selection_display = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://bbmcdiwu6bcjn"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SelectionComponent"]
+transform = Transform3D(-0.5, 7.54979e-08, 0, -7.54979e-08, -0.5, 0, 0, 0, 0.2, 0, 2.42957, 0)
+mesh = SubResource("PrismMesh_kjrou")
