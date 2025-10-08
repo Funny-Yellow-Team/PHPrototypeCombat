@@ -113,6 +113,7 @@ func instantiate_character_menu(character: Node3D, idx: int):
 	menu.character = character
 	menu.allies = allies
 	menu.ennemies = ennemies
+	menu.get_selected_ennemy = get_selected_ennemy
 	menu.set_input_name(InputManager.character_inputs[idx])
 	character_menu_container.add_child.call_deferred(menu)
 
@@ -120,3 +121,6 @@ func instantiate_ennemy_menu(character: Node3D):
 	var menu = ennemy_menu_prefab.instantiate() as EnnemyMenu
 	menu.character = character
 	ennemy_menu_container.add_child.call_deferred(menu)
+
+func get_selected_ennemy() -> Node3D:
+	return last_selected_ennemy.character

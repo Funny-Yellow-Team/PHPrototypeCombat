@@ -45,13 +45,3 @@ show_percentage = false
 
 [node name="AttackContainer" type="VBoxContainer" parent="CharacterContainer"]
 layout_mode = 2
-
-[node name="TargetContainer" type="VBoxContainer" parent="CharacterContainer"]
-visible = false
-layout_mode = 2
-
-[node name="BackButton" type="Button" parent="CharacterContainer/TargetContainer"]
-layout_mode = 2
-text = "<-"
-
-[connection signal="pressed" from="CharacterContainer/TargetContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -8,8 +8,8 @@ var atk_cmp: AttackComponent
 var atk_buttons: Array[Button]
 var selected_attack: AttackPreset
 var trg_buttons: Array[Button]
-var selected_targets: Array[Node3D]
 var input_name: String
+var get_selected_ennemy: Callable
 
 var not_selected_style: StyleBox = preload("res://assets/UI/not_selected_character_style.tres")
 var selected_style: StyleBox = preload("res://assets/UI/selected_character_style.tres")
@@ -49,49 +49,21 @@ func on_attack_button_pressed(preset: AttackPreset):
 	selected_attack = preset
 	if (selected_attack.is_multi_target):
 		if (selected_attack.target_type == Enums.TargetTypes.ALLY):
-			selected_targets = allies
+			launch_attack(allies)
 		else:
-			selected_targets = ennemies
-		launch_attack()
+			launch_attack(ennemies)
 	else:
 		if (selected_attack.target_type == Enums.TargetTypes.ALLY):
-			for ally in allies:
-				bind_target_button(ally)
+			launch_attack([character])
 		else:
-			for ennemy in ennemies:
-				bind_target_button(ennemy)
-		$CharacterContainer/AttackContainer.visible = false
-		$CharacterContainer/TargetContainer.visible = true
+			launch_attack([get_selected_ennemy.call()])
 
-func on_target_button_pressed(target: Node3D):
-	selected_targets = [target]
-	launch_attack()
-
-func launch_attack():
+func launch_attack(selected_targets: Array[Node3D]):
 	atk_cmp.do_attack(selected_targets, selected_attack)
-	reset_targets()
 
 func on_attack_done():
 	$CharacterContainer/CooldownBar.max_value = atk_cmp.current_attack.cooldown
 	$CharacterContainer/CooldownBar.value = atk_cmp.current_attack.cooldown
-
-func bind_target_button(selected_character: Node3D):
-	var btn = TargetButton.instantiate_button(selected_character)
-	btn.target_button_pressed.connect(on_target_button_pressed)
-	$CharacterContainer/TargetContainer.add_child(btn)
-	trg_buttons.append(btn)
-
-func _on_back_button_pressed() -> void:
-	reset_targets()
-
-func reset_targets():
-	selected_attack = null
-	selected_targets = []
-	$CharacterContainer/AttackContainer.visible = true
-	$CharacterContainer/TargetContainer.visible = false
-	for btn in trg_buttons:
-		btn.queue_free()
-	trg_buttons = []
 
 func set_input_name(new_input_name: String):
 	input_name = new_input_name
