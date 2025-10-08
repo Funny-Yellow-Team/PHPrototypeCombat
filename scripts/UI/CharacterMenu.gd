@@ -54,7 +54,7 @@ func on_attack_button_pressed(preset: AttackPreset):
 			launch_attack(ennemies)
 	else:
 		if (selected_attack.target_type == Enums.TargetTypes.ALLY):
-			launch_attack([character])
+			launch_attack([character]) # TODO Add proper targeting for revive attack
 		else:
 			launch_attack([get_selected_ennemy.call()])
 
