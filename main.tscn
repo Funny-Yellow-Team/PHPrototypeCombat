@@ -1,9 +1,163 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3yq52ykn4pqb"]
+[gd_scene load_steps=24 format=3 uid="uid://c3yq52ykn4pqb"]
 
 [ext_resource type="Script" uid="uid://bwbupkvhbhibw" path="res://scripts/game/CombatManager.gd" id="1_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cbvca7xy16311" path="res://assets/textures/floor.png" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://dtjbnhtxe5a88" path="res://scripts/game/templates/CharacterTemplate.gd" id="2_272bh"]
 [ext_resource type="Script" uid="uid://bn3kywdjpfoip" path="res://scripts/game/templates/AttackPresetTemplate.gd" id="3_5vw27"]
+[ext_resource type="PackedScene" uid="uid://ud35f84weq0h" path="res://assets/prefabs/Character.tscn" id="4_lquwl"]
+
+[sub_resource type="Resource" id="Resource_lquwl"]
+script = ExtResource("3_5vw27")
+attack_name = "Charge"
+attack_style = 0
+target_type = 0
+is_multi_target = false
+damage = 50
+cooldown = 3.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_kek77"]
+script = ExtResource("3_5vw27")
+attack_name = "Stomp"
+attack_style = 2
+target_type = 0
+is_multi_target = true
+damage = 25
+cooldown = 5.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_4c57u"]
+script = ExtResource("3_5vw27")
+attack_name = "Fireball"
+attack_style = 1
+target_type = 0
+is_multi_target = false
+damage = 100
+cooldown = 4.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_7mycd"]
+script = ExtResource("2_272bh")
+character_name = "Maxwell"
+max_health = 1000
+attack_presets = Array[ExtResource("3_5vw27")]([SubResource("Resource_lquwl"), SubResource("Resource_kek77"), SubResource("Resource_4c57u")])
+prefab = ExtResource("4_lquwl")
+model = 2
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+
+[sub_resource type="Resource" id="Resource_efxa6"]
+script = ExtResource("3_5vw27")
+attack_name = "Charge"
+attack_style = 0
+target_type = 0
+is_multi_target = false
+damage = 50
+cooldown = 3.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_dg77c"]
+script = ExtResource("3_5vw27")
+attack_name = "Stomp"
+attack_style = 2
+target_type = 0
+is_multi_target = true
+damage = 25
+cooldown = 5.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_ycdy4"]
+script = ExtResource("3_5vw27")
+attack_name = "Heal"
+attack_style = 3
+target_type = 1
+is_multi_target = false
+damage = 100
+cooldown = 4.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_272bh"]
+script = ExtResource("2_272bh")
+character_name = "Oiiaiiooo"
+max_health = 1200
+attack_presets = Array[ExtResource("3_5vw27")]([SubResource("Resource_efxa6"), SubResource("Resource_dg77c"), SubResource("Resource_ycdy4")])
+prefab = ExtResource("4_lquwl")
+model = 4
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+
+[sub_resource type="Resource" id="Resource_074og"]
+script = ExtResource("3_5vw27")
+attack_name = "Heal"
+attack_style = 3
+target_type = 1
+is_multi_target = false
+damage = 100
+cooldown = 3.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_cegan"]
+script = ExtResource("3_5vw27")
+attack_name = "Heal++"
+attack_style = 4
+target_type = 1
+is_multi_target = true
+damage = 50
+cooldown = 4.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_82xsv"]
+script = ExtResource("3_5vw27")
+attack_name = "Rez"
+attack_style = 5
+target_type = 1
+is_multi_target = false
+damage = 250
+cooldown = 6.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_5vw27"]
+script = ExtResource("2_272bh")
+character_name = "Engineer"
+max_health = 800
+attack_presets = Array[ExtResource("3_5vw27")]([SubResource("Resource_074og"), SubResource("Resource_cegan"), SubResource("Resource_82xsv")])
+prefab = ExtResource("4_lquwl")
+model = 7
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+
+[sub_resource type="Resource" id="Resource_w48qg"]
+script = ExtResource("2_272bh")
+character_name = "Doge"
+max_health = 1000
+attack_presets = Array[ExtResource("3_5vw27")]([])
+prefab = ExtResource("4_lquwl")
+model = 0
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+
+[sub_resource type="Resource" id="Resource_vivmo"]
+script = ExtResource("2_272bh")
+character_name = "Cirno"
+max_health = 1000
+attack_presets = Array[ExtResource("3_5vw27")]([])
+prefab = ExtResource("4_lquwl")
+model = 5
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+
+[sub_resource type="Resource" id="Resource_2cqfq"]
+script = ExtResource("2_272bh")
+character_name = "Cheems"
+max_health = 1000
+attack_presets = Array[ExtResource("3_5vw27")]([])
+prefab = ExtResource("4_lquwl")
+model = 1
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+
+[sub_resource type="Resource" id="Resource_yaehf"]
+script = ExtResource("2_272bh")
+character_name = "Obama"
+max_health = 1000
+attack_presets = Array[ExtResource("3_5vw27")]([])
+prefab = ExtResource("4_lquwl")
+model = 3
+metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_texture = ExtResource("1_ig7tw")
@@ -14,141 +168,13 @@ material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Root" type="Node3D"]
 
-[node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("ally_templates", "ennemy_templates", "character_menu_container", "ennemy_menu_container")]
+[node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("character_menu_container", "ennemy_menu_container")]
 script = ExtResource("1_7mycd")
-ally_templates = [NodePath("MaxwellTemplate"), NodePath("OiiaiioooTemplate"), NodePath("EngineerTemplate")]
-ennemy_templates = [NodePath("EnnemyTemplate1"), NodePath("EnnemyTemplate2"), NodePath("EnnemyTemplate3"), NodePath("EnnemyTemplate4")]
+ally_templates = Array[ExtResource("2_272bh")]([SubResource("Resource_7mycd"), SubResource("Resource_272bh"), SubResource("Resource_5vw27")])
+ennemy_templates = Array[ExtResource("2_272bh")]([SubResource("Resource_w48qg"), SubResource("Resource_vivmo"), SubResource("Resource_2cqfq"), SubResource("Resource_yaehf")])
 character_menu_container = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/CharacterHBox")
 ennemy_menu_container = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/EnnemiesContainer")
 metadata/_custom_type_script = "uid://bwbupkvhbhibw"
-
-[node name="MaxwellTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
-script = ExtResource("2_272bh")
-character_name = "Maxwell"
-max_health = 1000
-attack_presets = [NodePath("ChargeAttack"), NodePath("StompAttack"), NodePath("FireballAttack")]
-model = 2
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
-
-[node name="ChargeAttack" type="Node" parent="CombatManager/MaxwellTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Charge"
-damage = 50
-cooldown = 3.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="StompAttack" type="Node" parent="CombatManager/MaxwellTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Stomp"
-attack_style = 2
-is_multi_target = true
-damage = 25
-cooldown = 5.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="FireballAttack" type="Node" parent="CombatManager/MaxwellTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Fireball"
-attack_style = 1
-damage = 100
-cooldown = 4.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="OiiaiioooTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
-script = ExtResource("2_272bh")
-character_name = "Oiiaiiooo"
-max_health = 1200
-attack_presets = [NodePath("ChargeAttack"), NodePath("StompAttack"), NodePath("HealAttack")]
-model = 4
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
-
-[node name="ChargeAttack" type="Node" parent="CombatManager/OiiaiioooTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Charge"
-damage = 50
-cooldown = 3.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="StompAttack" type="Node" parent="CombatManager/OiiaiioooTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Stomp"
-attack_style = 2
-is_multi_target = true
-damage = 50
-cooldown = 5.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="HealAttack" type="Node" parent="CombatManager/OiiaiioooTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Heal"
-attack_style = 3
-target_type = 1
-damage = 100
-cooldown = 4.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="EngineerTemplate" type="Node" parent="CombatManager" node_paths=PackedStringArray("attack_presets")]
-script = ExtResource("2_272bh")
-character_name = "Engineer"
-max_health = 800
-attack_presets = [NodePath("HealAttack"), NodePath("BigHealAttack"), NodePath("RezAttack")]
-model = 7
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
-
-[node name="HealAttack" type="Node" parent="CombatManager/EngineerTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Heal"
-attack_style = 3
-target_type = 1
-damage = 100
-cooldown = 3.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="BigHealAttack" type="Node" parent="CombatManager/EngineerTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Heal++"
-attack_style = 4
-target_type = 1
-is_multi_target = true
-damage = 50
-cooldown = 4.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="RezAttack" type="Node" parent="CombatManager/EngineerTemplate"]
-script = ExtResource("3_5vw27")
-attack_name = "Revive"
-attack_style = 5
-target_type = 1
-damage = 250
-cooldown = 5.0
-metadata/_custom_type_script = "uid://bn3kywdjpfoip"
-
-[node name="EnnemyTemplate1" type="Node" parent="CombatManager"]
-script = ExtResource("2_272bh")
-character_name = "Doge"
-max_health = 1000
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
-
-[node name="EnnemyTemplate2" type="Node" parent="CombatManager"]
-script = ExtResource("2_272bh")
-character_name = "Cirno"
-max_health = 1000
-model = 5
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
-
-[node name="EnnemyTemplate3" type="Node" parent="CombatManager"]
-script = ExtResource("2_272bh")
-character_name = "Cheems"
-max_health = 1000
-model = 1
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
-
-[node name="EnnemyTemplate4" type="Node" parent="CombatManager"]
-script = ExtResource("2_272bh")
-character_name = "Obama"
-max_health = 1000
-model = 3
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
 [node name="AllySpawnPoint1" type="Node3D" parent="CombatManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.25, 8)
