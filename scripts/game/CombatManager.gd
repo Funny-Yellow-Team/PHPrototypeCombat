@@ -4,7 +4,7 @@ class_name CombatManager
 var display_list = preload("res://scripts/helpers/DisplayList.gd").new()
 @export var ally_templates: Array[CharacterTemplate]
 var allies: Array[Node3D]
-@export var ennemy_templates: Array[CharacterTemplate]
+@export var ennemy_templates: Array[EnnemyTemplate]
 var ennemies: Array[Node3D]
 @export var character_menu_container: Control
 @export var ennemy_menu_container: Control
@@ -30,7 +30,7 @@ func _ready() -> void:
 	ennemy_spawn_points.append($EnnemySpawnPoint7)
 	ennemy_spawn_points.append($EnnemySpawnPoint8)
 	for j in range(0, ennemy_templates.size()):
-		var character = instantiate_character(
+		var character = instantiate_ennemy(
 			ennemy_templates[j],
 			ennemy_spawn_points[j].global_position,
 			ennemy_spawn_points[j].rotation)
@@ -46,6 +46,7 @@ func _ready() -> void:
 	for i in range(0, allies.size()):
 		instantiate_character_menu(allies[i], i)
 	set_selected_ennemy.call_deferred(0)
+	GameInfo.fill_data(allies, ennemies)
 
 func _process(delta: float) -> void:
 	if (Input.is_action_just_pressed("ui_up")):
@@ -95,6 +96,18 @@ func instantiate_character(template: CharacterTemplate, spawn_position: Vector3,
 	var atk_cmp = ServiceContainer.get_attack_component(character)
 	for preset in template.attack_presets:
 		instantiate_attack_preset(preset, character, atk_cmp)
+	return character
+
+func instantiate_ennemy(template: EnnemyTemplate, spawn_position: Vector3, spawn_rotation: Vector3):
+	var character = instantiate_character(
+		template,
+		spawn_position,
+		spawn_rotation
+	)
+	for gambit in template.AI_gambits:
+		gambit.initialize_condition(character)
+	var ai_cmp = ServiceContainer.get_ai_component(character)
+	ai_cmp.initialize.call_deferred(template.AI_gambits)
 	return character
 
 func instantiate_attack_preset(template: AttackPresetTemplate, character: Node3D, atk_cmp: AttackComponent):

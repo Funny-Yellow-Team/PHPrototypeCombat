@@ -6,7 +6,6 @@ var is_controller_mode: Enums.InputType = Enums.InputType.KEYBOARD
 var character_inputs: Array[String] = ["character1_selection", "character2_selection", "character3_selection", "character4_selection"]
 var attack_inputs: Array[String] = ["attack1_selection","attack2_selection","attack3_selection"]
 
-
 var xbox_tex: Dictionary[String, Texture2D] = {
 	"character1_selection": preload("res://assets/textures/inputs/Xbox Series/XboxSeriesX_LT.png"),
 	"character2_selection": preload("res://assets/textures/inputs/Xbox Series/XboxSeriesX_LB.png"),
@@ -35,7 +34,6 @@ var kb_tex: Dictionary[String, Texture2D] = {
 	"attack3_selection": preload("res://assets/textures/inputs/Keyboard & Mouse/Light/R_Key_Light.png")
 }
 var texture: Dictionary[String, Texture2D] = kb_tex
-
 
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():

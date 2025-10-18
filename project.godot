@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Enums="*res://scripts/helpers/Enums.gd"
 InputManager="*res://scripts/helpers/InputManager.gd"
+GameInfo="*res://scripts/game/GameInfo.gd"
 
 [display]
 

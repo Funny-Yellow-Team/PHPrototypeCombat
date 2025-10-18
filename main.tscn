@@ -1,10 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://c3yq52ykn4pqb"]
+[gd_scene load_steps=37 format=3 uid="uid://c3yq52ykn4pqb"]
 
 [ext_resource type="Script" uid="uid://bwbupkvhbhibw" path="res://scripts/game/CombatManager.gd" id="1_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cbvca7xy16311" path="res://assets/textures/floor.png" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://dtjbnhtxe5a88" path="res://scripts/game/templates/CharacterTemplate.gd" id="2_272bh"]
 [ext_resource type="Script" uid="uid://bn3kywdjpfoip" path="res://scripts/game/templates/AttackPresetTemplate.gd" id="3_5vw27"]
 [ext_resource type="PackedScene" uid="uid://ud35f84weq0h" path="res://assets/prefabs/Character.tscn" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://b5vj3chwffbdo" path="res://scripts/game/templates/EnnemyTemplate.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://cuqg5qj3wkros" path="res://scripts/game/ai/BaseCondition.gd" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://p1au3kdybbb4" path="res://assets/prefabs/EnnemyCharacter.tscn" id="7_5vw27"]
+[ext_resource type="Script" uid="uid://bcwohf288tnji" path="res://scripts/game/ai/conditions/AlliesHealthCondition.gd" id="7_kek77"]
+[ext_resource type="Script" uid="uid://tlhfbetejmb5" path="res://scripts/game/ai/targets/RandomAllyTarget.gd" id="8_dg77c"]
+[ext_resource type="Script" uid="uid://bv73mg5dpg82i" path="res://scripts/game/ai/conditions/ElseCondition.gd" id="9_ycdy4"]
+[ext_resource type="Script" uid="uid://b6kpptlb8uikc" path="res://scripts/game/ai/targets/RandomEnnemyTarget.gd" id="10_w48qg"]
 
 [sub_resource type="Resource" id="Resource_lquwl"]
 script = ExtResource("3_5vw27")
@@ -123,41 +130,90 @@ prefab = ExtResource("4_lquwl")
 model = 7
 metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
 
+[sub_resource type="Resource" id="Resource_ryguw"]
+script = ExtResource("3_5vw27")
+attack_name = "Heal"
+attack_style = 3
+target_type = 0
+is_multi_target = false
+damage = 100
+cooldown = 5.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_d13ii"]
+script = ExtResource("8_dg77c")
+include_self = false
+metadata/_custom_type_script = "uid://tlhfbetejmb5"
+
+[sub_resource type="Resource" id="Resource_getpj"]
+script = ExtResource("7_kek77")
+number_of_allies = 1
+percentage_of_health = 50
+comparator = 1
+target = SubResource("Resource_d13ii")
+attack = SubResource("Resource_ryguw")
+metadata/_custom_type_script = "uid://bcwohf288tnji"
+
+[sub_resource type="Resource" id="Resource_1u8w0"]
+script = ExtResource("3_5vw27")
+attack_name = "Charge"
+attack_style = 0
+target_type = 0
+is_multi_target = false
+damage = 10
+cooldown = 4.0
+metadata/_custom_type_script = "uid://bn3kywdjpfoip"
+
+[sub_resource type="Resource" id="Resource_0odxb"]
+script = ExtResource("10_w48qg")
+include_self = false
+metadata/_custom_type_script = "uid://b6kpptlb8uikc"
+
+[sub_resource type="Resource" id="Resource_lswn8"]
+script = ExtResource("9_ycdy4")
+target = SubResource("Resource_0odxb")
+attack = SubResource("Resource_1u8w0")
+metadata/_custom_type_script = "uid://bv73mg5dpg82i"
+
 [sub_resource type="Resource" id="Resource_w48qg"]
-script = ExtResource("2_272bh")
+script = ExtResource("5_7mycd")
+AI_gambits = Array[ExtResource("5_272bh")]([SubResource("Resource_getpj"), SubResource("Resource_lswn8")])
 character_name = "Doge"
 max_health = 1000
 attack_presets = Array[ExtResource("3_5vw27")]([])
-prefab = ExtResource("4_lquwl")
+prefab = ExtResource("7_5vw27")
 model = 0
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+metadata/_custom_type_script = "uid://b5vj3chwffbdo"
 
 [sub_resource type="Resource" id="Resource_vivmo"]
-script = ExtResource("2_272bh")
+script = ExtResource("5_7mycd")
+AI_gambits = Array[ExtResource("5_272bh")]([])
 character_name = "Cirno"
 max_health = 1000
 attack_presets = Array[ExtResource("3_5vw27")]([])
-prefab = ExtResource("4_lquwl")
+prefab = ExtResource("7_5vw27")
 model = 5
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+metadata/_custom_type_script = "uid://b5vj3chwffbdo"
 
 [sub_resource type="Resource" id="Resource_2cqfq"]
-script = ExtResource("2_272bh")
+script = ExtResource("5_7mycd")
+AI_gambits = Array[ExtResource("5_272bh")]([])
 character_name = "Cheems"
 max_health = 1000
 attack_presets = Array[ExtResource("3_5vw27")]([])
-prefab = ExtResource("4_lquwl")
+prefab = ExtResource("7_5vw27")
 model = 1
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+metadata/_custom_type_script = "uid://b5vj3chwffbdo"
 
 [sub_resource type="Resource" id="Resource_yaehf"]
-script = ExtResource("2_272bh")
+script = ExtResource("5_7mycd")
+AI_gambits = Array[ExtResource("5_272bh")]([])
 character_name = "Obama"
 max_health = 1000
 attack_presets = Array[ExtResource("3_5vw27")]([])
-prefab = ExtResource("4_lquwl")
+prefab = ExtResource("7_5vw27")
 model = 3
-metadata/_custom_type_script = "uid://dtjbnhtxe5a88"
+metadata/_custom_type_script = "uid://b5vj3chwffbdo"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_texture = ExtResource("1_ig7tw")
@@ -171,7 +227,7 @@ material = SubResource("StandardMaterial3D_0xm2m")
 [node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("character_menu_container", "ennemy_menu_container")]
 script = ExtResource("1_7mycd")
 ally_templates = Array[ExtResource("2_272bh")]([SubResource("Resource_7mycd"), SubResource("Resource_272bh"), SubResource("Resource_5vw27")])
-ennemy_templates = Array[ExtResource("2_272bh")]([SubResource("Resource_w48qg"), SubResource("Resource_vivmo"), SubResource("Resource_2cqfq"), SubResource("Resource_yaehf")])
+ennemy_templates = Array[ExtResource("5_7mycd")]([SubResource("Resource_w48qg"), SubResource("Resource_vivmo"), SubResource("Resource_2cqfq"), SubResource("Resource_yaehf")])
 character_menu_container = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/CharacterHBox")
 ennemy_menu_container = NodePath("../Control/PanelContainer/MarginContainer/HBoxContainer/EnnemiesContainer")
 metadata/_custom_type_script = "uid://bwbupkvhbhibw"

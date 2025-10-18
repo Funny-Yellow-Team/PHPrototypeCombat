@@ -36,3 +36,8 @@ enum InputType {
 	XBOX,
 	PLAYSTATION
 }
+
+enum Comparator {
+	MORE_THAN,
+	LESS_THAN
+}

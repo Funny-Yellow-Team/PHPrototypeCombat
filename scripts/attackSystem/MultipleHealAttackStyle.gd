@@ -1,8 +1,6 @@
 extends BaseAttackStyle
 class_name MultipleHealAttackStyle
 
-# TODO FIX THIS DAMN AWAIT THING
-
 signal all_heal_done
 
 var heal_count = 0

@@ -76,3 +76,14 @@ static func get_selection_component(node: Node) -> SelectionComponent:
 	if select_cmp == null:
 		push_error("The node %s does not contain a SelectionComponent" % [node.name])
 	return select_cmp
+
+static func get_ai_component(node: Node) -> AIComponent:
+	if node == null:
+		push_error("Node given in parameter is null")
+	var ai_cmp: AIComponent
+	for child in node.get_children(true):
+		if child is AIComponent:
+			ai_cmp = child
+	if ai_cmp == null:
+		push_error("The node %s does not contain a AIComponent" % [node.name])
+	return ai_cmp
