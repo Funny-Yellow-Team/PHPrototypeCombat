@@ -148,10 +148,10 @@ metadata/_custom_type_script = "uid://tlhfbetejmb5"
 [sub_resource type="Resource" id="Resource_getpj"]
 script = ExtResource("7_kek77")
 number_of_allies = 1
-percentage_of_health = 50
 comparator = 1
-target = SubResource("Resource_d13ii")
+percentage_of_health = 50
 attack = SubResource("Resource_ryguw")
+target = SubResource("Resource_d13ii")
 metadata/_custom_type_script = "uid://bcwohf288tnji"
 
 [sub_resource type="Resource" id="Resource_1u8w0"]
@@ -171,8 +171,8 @@ metadata/_custom_type_script = "uid://b6kpptlb8uikc"
 
 [sub_resource type="Resource" id="Resource_lswn8"]
 script = ExtResource("9_ycdy4")
-target = SubResource("Resource_0odxb")
 attack = SubResource("Resource_1u8w0")
+target = SubResource("Resource_0odxb")
 metadata/_custom_type_script = "uid://bv73mg5dpg82i"
 
 [sub_resource type="Resource" id="Resource_w48qg"]

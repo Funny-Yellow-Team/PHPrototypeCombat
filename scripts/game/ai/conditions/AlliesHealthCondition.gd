@@ -1,12 +1,13 @@
 extends BaseCondition
 class_name AlliesHealthCondition
 
+@export_group("Condition")
 @export var number_of_allies: int
-@export var percentage_of_health: int
 @export var comparator: Enums.Comparator
+@export_range(0, 100, 1.0, "suffix:%") var percentage_of_health: int
 
 func validate_condition() -> bool:
-	var allies = GameInfo.ennemies.duplicate()
+	var allies = GameInfo.npcs.duplicate()
 	allies.erase(character)
 	var result = 0
 	for ally in allies:

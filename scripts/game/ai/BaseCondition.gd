@@ -1,8 +1,9 @@
 extends Resource
 class_name BaseCondition
 
-@export var target: BaseTarget
+@export_group("Action")
 @export var attack: AttackPresetTemplate
+@export var target: BaseTarget
 var attack_preset: AttackPreset
 var character: Node3D
 
